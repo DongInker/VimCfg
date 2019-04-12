@@ -1,0 +1,39 @@
+
+------------------------
+$VIMRUNTIME/syntax/c.vim
+************************
+我们还可以让函数名也高亮起来，在C:\Program Files\Vim\vim72\syntax下找到 c.vim 和 cpp.vim，分别添加以下内容：
+syn match cFunction "\<[a-zA-Z_][a-zA-Z_0-9]*\>[^()]*)("me=e-2
+syn match cFunction "\<[a-zA-Z_][a-zA-Z_0-9]*\>\s*("me=e-1
+hi cFunction gui=NONE guifg=#B5A1FF
+
+------------------------
+$VIMRUNTIME/macros/matchit.vim
+************************
+目的:添加verilog语言成对标签跳转
+mathchit.vim添加如下代码:
+
+let b:match_ignorecase=0
+let b:match_words=
+  \ '\<begin\>:\<end\>,' .
+  \ '\<if\>:\<else\>,' .
+  \ '\<module\>:\<endmodule\>,' .
+  \ '\<class\>:\<endclass\>,' .
+  \ '\<program\>:\<endprogram\>,' .
+  \ '\<clocking\>:\<endclocking\>,' .
+  \ '\<property\>:\<endproperty\>,' .
+  \ '\<sequence\>:\<endsequence\>,' .
+  \ '\<package\>:\<endpackage\>,' .
+  \ '\<covergroup\>:\<endgroup\>,' .
+  \ '\<primitive\>:\<endprimitive\>,' .
+  \ '\<specify\>:\<endspecify\>,' .
+  \ '\<generate\>:\<endgenerate\>,' .
+  \ '\<interface\>:\<endinterface\>,' .
+  \ '\<function\>:\<endfunction\>,' .
+  \ '\<task\>:\<endtask\>,' .
+  \ '\<case\>\|\<casex\>\|\<casez\>:\<endcase\>,' .
+  \ '\<fork\>:\<join\>\|\<join_any\>\|\<join_none\>,' .
+  \ '`ifdef\>:`else\>:`endif\>,'
+
+_vimrc添加
+source $VIMRUNTIME/macros/matchit.vim
