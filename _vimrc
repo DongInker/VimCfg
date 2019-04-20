@@ -319,6 +319,13 @@ au BufNewFile,BufRead *.py,*.pyw setf python
 """"""""""""""""""""""""""""
 
 "----------------
+"    nmap       "
+"""""""""""""""""
+" Esc 清除搜索高亮
+nnoremap <esc> :noh<return><esc>
+
+
+"----------------
 "    imap       "
 """""""""""""""""
 " 插入模式返回Norm
