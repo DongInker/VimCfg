@@ -37,7 +37,7 @@ endfunction
 "    leader     "
 """""""""""""""""
 " 设置 leader 键，例子为空号键 ; 等
-""let mapleader=" " 
+let mapleader="," 
 
 " general copy/paste.
 " NOTE: y,p,P could be mapped by other key-mapping
@@ -49,8 +49,8 @@ map <unique> <leader>wa :wall<cr>
 map <unique> <leader>wf :w<cr>
 
 
-" 把空格映射成:
-" nmap <space> :
+" 普通模式把;映射成:
+nnoremap ; :
 
 set helplang=cn            "使用中文帮助文档
 set encoding=utf-8        "查看utf-8格式的帮助文档
@@ -81,6 +81,21 @@ set nobackup               " 不生成备份文件
 set hidden                 " 允许在未保存修改时切换缓冲区
 set showcmd                " 显示命令
 
+"使用 tab 替换 %
+nnoremap <tab> %
+vnoremap <tab> %
+
+"搜索输入全小写不分大小写 输入1或1个以上区分大小写 
+set ignorecase
+set smartcase
+
+"根据窗口大小自动换行
+"set wrap
+"set textwidth=79
+"set formatoptions=qrn1
+
+"在第85个字符的位置显示了一个高亮列
+set colorcolumn=85
 
 "折叠
 set fdm=marker              " 标记折叠方法
