@@ -36,8 +36,8 @@ endfunction
 "----------------
 "    leader     "
 """""""""""""""""
-" 作为命令前缀 右手小拇指直接按下
-let mapleader=";"
+" 设置 leader 键，例子为空号键 ; 等
+""let mapleader=" " 
 
 " general copy/paste.
 " NOTE: y,p,P could be mapped by other key-mapping
