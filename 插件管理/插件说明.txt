@@ -1,0 +1,28 @@
+-------------------------------
+*LookupFile (高效查找文件)
+*******************************
+ Lookupfile插件可以在下面的链接下载：
+ http://www.vim.org/scripts/script.php?script_id=1581 
+
+ Lookupfile插件还需要最新的genutils支持，
+ 需要下载genutils：http://www.vim.org/scripts/script.php?script_id=197 
+
+_vimrc 添加如下
+""""""""""""""""""""""""""""
+"lookupfile setting
+"""""""""""""""""""""""""""""
+let g:LookupFile_MinPatLength           = 2 "最少输入2个字符开始匹配
+let g:LookupFile_PreserveLastPattern    = 0 "不保存上次查找的字符串
+let g:LookupFile_PreservePatternHistory = 1 "保存查找历史
+let g:LookupFile_AlwaysAcceptFirst      = 1 "回车打开第一个匹配项目
+let g:LookupFile_AllowNewFiles          = 0 "不允许创建不存在的文件
+
+"查找文件名及包含出现字符串的文件
+nmap <silent> <leader>lf :LUTags<cr>
+"查找已打开的buffer字符名
+nmap <silent> <leader>ll :LUBufs<cr>
+"指定目录结构查找
+nmap <silent> <leader>lw :LUWalk<cr>
+" close lookupfile window by two <Esc>
+nnoremap <Esc><Esc> <C-W>q
+inoremap <Esc><Esc> <Esc><C-W>q 

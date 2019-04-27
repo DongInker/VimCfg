@@ -207,7 +207,7 @@ function! Do_CsTag()
     else
         silent! execute "!find . -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.m" -o -name "*.mm" -o -name "*.java" -o -name "*.py" > cscope.files"
     endif
-    silent! execute "!cscope -b"
+    silent! execute "!cscope -bC"
     if filereadable("cscope.out")
         execute "cs add cscope.out"
     endif
@@ -315,6 +315,25 @@ augroup QFixToggle
     autocmd BufWinEnter quickfix let g:qfix_win = bufnr("$")
     autocmd BufWinLeave * if exists("g:qfix_win") && expand("<abuf>") == g:qfix_win | unlet! g:qfix_win | endif
 augroup END
+
+""""""""""""""""""""""""""""
+"lookupfile setting
+"""""""""""""""""""""""""""""
+let g:LookupFile_MinPatLength           = 2 "最少输入2个字符开始匹配
+let g:LookupFile_PreserveLastPattern    = 0 "不保存上次查找的字符串
+let g:LookupFile_PreservePatternHistory = 1 "保存查找历史
+let g:LookupFile_AlwaysAcceptFirst      = 1 "回车打开第一个匹配项目
+let g:LookupFile_AllowNewFiles          = 0 "不允许创建不存在的文件
+
+"查找文件名及包含出现字符串的文件
+nmap <silent> <leader>lf :LUTags<cr>
+"查找已打开的buffer字符名
+nmap <silent> <leader>ll :LUBufs<cr>
+"指定目录结构查找
+nmap <silent> <leader>lw :LUWalk<cr>
+" close lookupfile window by two <Esc>
+nnoremap <Esc><Esc> <C-W>q
+inoremap <Esc><Esc> <Esc><C-W>q 
 
 """"""""""""""""""""""""""""
 "配置python解释器
