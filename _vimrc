@@ -331,9 +331,10 @@ nmap <silent> <leader>lf :LUTags<cr>
 nmap <silent> <leader>ll :LUBufs<cr>
 "指定目录结构查找
 nmap <silent> <leader>lw :LUWalk<cr>
+
 " close lookupfile window by two <Esc>
-nnoremap <Esc><Esc> <C-W>q
-inoremap <Esc><Esc> <Esc><C-W>q 
+"nnoremap <Esc><Esc> <C-W>q
+"inoremap <Esc><Esc> <Esc><C-W>q 
 
 """"""""""""""""""""""""""""
 "配置python解释器
