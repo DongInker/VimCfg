@@ -37,17 +37,16 @@ endfunction
 "    leader     "
 """""""""""""""""
 " 设置 leader 键，例子为空号键 ; 等
-let mapleader="," 
+"let mapleader="," 
 
 " general copy/paste.
 " NOTE: y,p,P could be mapped by other key-mapping
-map <unique> <leader>y "*y
-map <unique> <leader>p "*p
-map <unique> <leader>P "*P
-map <unique> <leader>v <C-q> 
-map <unique> <leader>wa :wall<cr>
-map <unique> <leader>wf :w<cr>
-
+nmap <unique> ,y "*y
+nmap <unique> ,p "*p
+nmap <unique> ,P "*P
+nmap <unique> ,v <C-q> 
+nmap <unique> ,wa :wall<cr>
+nmap <unique> ,wf :w<cr>
 
 " 普通模式把;映射成:
 nnoremap ; :
@@ -111,7 +110,7 @@ function! MaximizeWindow()
     silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
 endfunction
 
-"set guioptions-=m " 隐藏菜单栏 
+set guioptions-=m " 隐藏菜单栏 
 set guioptions-=T " 隐藏工具栏 
 "set guioptions-=L " 隐藏左侧滚动条 
 "set guioptions-=r " 隐藏右侧滚动条 
@@ -276,14 +275,14 @@ endfunction
 "nmap <F5>i :cs find i <C-R>=expand("<cfile>")<CR>$<CR> "查找并打开文件
 "nmap <F5>d :cs find d <C-R>=expand("<cword>")<CR><CR>  "查找包含本文件的文件
 
-nmap <unique> <leader>fs :cs find s <C-R>=expand("<cword>")<CR><CR>  "查找函数名、宏、枚举值等出现的地方
-nmap <unique> <leader>fg :cs find g <C-R>=expand("<cword>")<CR><CR>  "查找函数、宏、枚举等定义的位置
-nmap <unique> <leader>fc :cs find c <C-R>=expand("<cword>")<CR><CR>  "查找本函数调用的函数
-nmap <unique> <leader>ft :cs find t <C-R>=expand("<cword>")<CR><CR>  "查找调用本函数的函数
-nmap <unique> <leader>fe :cs find e 
-nmap <unique> <leader>ff :cs find f 
-nmap <unique> <leader>fi :cs find i <C-R>=expand("<cfile>")<CR>$<CR> "查找并打开文件
-nmap <unique> <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>  "查找包含本文件的文件
+nmap <unique> ,fs :cs find s <C-R>=expand("<cword>")<CR><CR>  "查找函数名、宏、枚举值等出现的地方
+nmap <unique> ,fg :cs find g <C-R>=expand("<cword>")<CR><CR>  "查找函数、宏、枚举等定义的位置
+nmap <unique> ,fc :cs find c <C-R>=expand("<cword>")<CR><CR>  "查找本函数调用的函数
+nmap <unique> ,ft :cs find t <C-R>=expand("<cword>")<CR><CR>  "查找调用本函数的函数
+nmap <unique> ,fe :cs find e 
+nmap <unique> ,ff :cs find f 
+nmap <unique> ,fi :cs find i <C-R>=expand("<cfile>")<CR>$<CR> "查找并打开文件
+nmap <unique> ,fd :cs find d <C-R>=expand("<cword>")<CR><CR>  "查找包含本文件的文件
 
 "设定使用quickfix窗口来显示cscope的结果
 set cscopequickfix=s-,c-,d-,i-,t-,e-    
@@ -294,7 +293,7 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 nmap <F8>   :cn<cr>        "前一项
 nmap <F7>   :cp<cr>        "后一项
 
-"nmap <leader>co :QFix<CR>
+"nmap ,co :QFix<CR>
 "F6 开关QuickFix窗口
 nmap <F6> :call QFixToggle(1)<CR>
 command! -bang -nargs=? QFix call QFixToggle(<bang>0)
@@ -326,11 +325,11 @@ let g:LookupFile_AlwaysAcceptFirst      = 1 "回车打开第一个匹配项目
 let g:LookupFile_AllowNewFiles          = 0 "不允许创建不存在的文件
 
 "查找文件名及包含出现字符串的文件
-nmap <silent> <leader>lf :LUTags<cr>
+nmap <silent> ,lf :LUTags<cr>
 "查找已打开的buffer字符名
-nmap <silent> <leader>ll :LUBufs<cr>
+nmap <silent> ,ll :LUBufs<cr>
 "指定目录结构查找
-nmap <silent> <leader>lw :LUWalk<cr>
+nmap <silent> ,lw :LUWalk<cr>
 
 " close lookupfile window by two <Esc>
 "nnoremap <Esc><Esc> <C-W>q
@@ -354,6 +353,19 @@ au BufNewFile,BufRead *.py,*.pyw setf python
 """"""""""""""""""""""""""""
 
 "----------------
+" Alt key map   "
+"""""""""""""""""
+inoremap <A-j> <ESC>:w!<cr>
+nnoremap <A-j> <ESC>
+vnoremap <A-j> <ESC>
+nnoremap <A-l> e
+vmap <A-l> e
+inoremap <A-l> <ESC>e
+nnoremap <A-h> b
+vmap <A-h> b
+inoremap <A-h> <ESC>b
+
+"----------------
 "    nmap       "
 """""""""""""""""
 " Esc 清除搜索高亮
@@ -363,9 +375,6 @@ nnoremap <esc> :noh<return><esc>
 "----------------
 "    imap       "
 """""""""""""""""
-" 插入模式返回Norm
-imap kk <ESC>
-
 
 """"""""""""""""""""""""""""
 "自动补全 ( { [ " '
