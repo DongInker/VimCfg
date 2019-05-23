@@ -41,6 +41,9 @@ endfunction
 
 " general copy/paste.
 " NOTE: y,p,P could be mapped by other key-mapping
+vmap <unique> ,y "*y
+vmap <unique> ,p "*p
+vmap <unique> ,P "*P
 nmap <unique> ,y "*y
 nmap <unique> ,p "*p
 nmap <unique> ,P "*P
