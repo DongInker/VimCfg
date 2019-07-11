@@ -32,7 +32,8 @@ endfunction
 """"""""""""""""""""""""""""
 " 环境设置
 """"""""""""""""""""""""""""
-
+set display=lastline
+set wrap
 "----------------
 "    leader     "
 """""""""""""""""
@@ -41,6 +42,9 @@ endfunction
 
 " general copy/paste.
 " NOTE: y,p,P could be mapped by other key-mapping
+vmap <unique> ,y "*y
+vmap <unique> ,p "*p
+vmap <unique> ,P "*P
 nmap <unique> ,y "*y
 nmap <unique> ,p "*p
 nmap <unique> ,P "*P
@@ -49,7 +53,10 @@ nmap <unique> ,wa :wall<cr>
 nmap <unique> ,wf :w<cr>
 
 " 普通模式把;映射成:
-nnoremap ; :
+"nnoremap ; :
+
+"插入模式 获取时间 xtime
+iab xtime <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
 
 set helplang=cn            "使用中文帮助文档
 set encoding=utf-8        "查看utf-8格式的帮助文档
