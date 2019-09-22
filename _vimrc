@@ -34,11 +34,6 @@ endfunction
 """"""""""""""""""""""""""""
 set display=lastline
 set wrap
-"----------------
-"    leader     "
-"""""""""""""""""
-" 设置 leader 键，例子为空号键 ; 等
-"let mapleader="," 
 
 " general copy/paste.
 " NOTE: y,p,P could be mapped by other key-mapping
@@ -51,11 +46,10 @@ nmap <unique> ,P "*P
 nmap <unique> ,v <C-q> 
 nmap <unique> ,wa :wall<cr>
 nmap <unique> ,wf :w<cr>
+nmap <unique> ,bin   :%!xxd -g 1<cr>
+nmap <unique> ,char  :%!xxd -r<cr>
 
-" 普通模式把;映射成:
-"nnoremap ; :
-
-"插入模式 获取时间 xtime
+"插入模式 获取插入时间 xtime
 iab xtime <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
 
 set helplang=cn            "使用中文帮助文档
@@ -373,6 +367,16 @@ vmap <A-h> b
 inoremap <A-h> <ESC>b
 
 "----------------
+" Shift key map "
+"""""""""""""""""
+
+"----------------
+" Space key map "
+"""""""""""""""""
+nnoremap <space>   <C-f>
+nnoremap <s-space> <C-b>
+
+"----------------
 "    nmap       "
 """""""""""""""""
 " Esc 清除搜索高亮
@@ -381,6 +385,10 @@ nnoremap <esc> :noh<return><esc>
 
 "----------------
 "    imap       "
+"""""""""""""""""
+
+"----------------
+"    cmap       "
 """""""""""""""""
 
 """"""""""""""""""""""""""""
