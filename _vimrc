@@ -276,14 +276,14 @@ endfunction
 "nmap <F5>i :cs find i <C-R>=expand("<cfile>")<CR>$<CR> "查找并打开文件
 "nmap <F5>d :cs find d <C-R>=expand("<cword>")<CR><CR>  "查找包含本文件的文件
 
-nmap <unique> ,fs :cs find s <C-R>=expand("<cword>")<CR><CR>  "查找函数名、宏、枚举值等出现的地方
-nmap <unique> ,fg :cs find g <C-R>=expand("<cword>")<CR><CR>  "查找函数、宏、枚举等定义的位置
-nmap <unique> ,fc :cs find c <C-R>=expand("<cword>")<CR><CR>  "查找本函数调用的函数
-nmap <unique> ,ft :cs find t <C-R>=expand("<cword>")<CR><CR>  "查找调用本函数的函数
+nmap <unique> ,fs :cs find s <C-R>=expand("<cword>")<CR><CR>"查找函数名、宏、枚举值等出现的地方
+nmap <unique> ,fg :cs find g <C-R>=expand("<cword>")<CR><CR>"查找函数、宏、枚举等定义的位置
+nmap <unique> ,fc :cs find c <C-R>=expand("<cword>")<CR><CR>"查找本函数调用的函数
+nmap <unique> ,ft :cs find t <C-R>=expand("<cword>")<CR><CR>"查找调用本函数的函数
 nmap <unique> ,fe :cs find e 
 nmap <unique> ,ff :cs find f 
-nmap <unique> ,fi :cs find i <C-R>=expand("<cfile>")<CR>$<CR> "查找并打开文件
-nmap <unique> ,fd :cs find d <C-R>=expand("<cword>")<CR><CR>  "查找包含本文件的文件
+nmap <unique> ,fi :cs find i <C-R>=expand("<cfile>")<CR>$<CR>"查找并打开文件
+nmap <unique> ,fd :cs find d <C-R>=expand("<cword>")<CR><CR>"查找包含本文件的文件
 
 "设定使用quickfix窗口来显示cscope的结果
 set cscopequickfix=s-,c-,d-,i-,t-,e-    
@@ -291,8 +291,8 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 """"""""""""""""""""""""""""
 "映射QuickFix的快捷键
 """""""""""""""""""""""""""""
-nmap <F8>   :cn<cr>        "前一项
-nmap <F7>   :cp<cr>        "后一项
+nmap <F8> :cn<cr>"前一项
+nmap <F7> :cp<cr>"后一项
 
 "nmap ,co :QFix<CR>
 "F6 开关QuickFix窗口
@@ -367,14 +367,12 @@ vmap <A-h> b
 inoremap <A-h> <ESC>b
 
 "----------------
-" Shift key map "
+" Ctrl key map  "
 """""""""""""""""
-
-"----------------
-" Space key map "
-"""""""""""""""""
-nnoremap <space>   <C-f>
-nnoremap <s-space> <C-b>
+nnoremap <C-j> <C-f>
+nnoremap <C-k> <C-b>
+vnoremap <C-j> <C-f>
+vnoremap <C-k> <C-b>
 
 "----------------
 "    nmap       "
