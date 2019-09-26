@@ -48,6 +48,8 @@ nmap <unique> ,wa :wall<cr>
 nmap <unique> ,wf :w<cr>
 nmap <unique> ,bin   :%!xxd -g 1<cr>
 nmap <unique> ,char  :%!xxd -r<cr>
+nmap <unique> ,ecfg  :ed $VIM/_vimrc<cr>
+nmap <unique> ,scfg  :so $VIM/_vimrc<cr>
 
 "插入模式 获取插入时间 xtime
 iab xtime <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
@@ -212,7 +214,8 @@ function! Do_CsTag()
         execute "cs add cscope.out"
     endif
     "更新ctags
-    silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q"
+    "silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q" "win7正常 win10使用会跳转到h文件中
+    silent! execute "!ctags -R *"
     ":'0  "使用书签跳转到上次退出时的地方
 endfunction
 
