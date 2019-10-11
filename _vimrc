@@ -183,9 +183,12 @@ nmap wj        <C-w>j
 nmap wk        <C-w>k
 nmap wl        <C-w>l
 
+"调节窗口大小
 nmap wn :vertical res 50<cr>
 nmap wb :vertical res 100<cr> 
 
+nmap <C-h> :vertical res+1<cr>
+nmap <C-l> :vertical res-1<cr>
 """"""""""""""""""""""""""""
 "多文档顶部标签栏编辑
 """"""""""""""""""""""""""""
