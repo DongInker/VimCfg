@@ -74,7 +74,7 @@ set tabstop=4              "tab键的空格数
 set expandtab              "使用空格代替tab 在写Makefile时需要有tab
 set backspace=2            "设置退格键可用
 
-set nu!                    "设置显示行号
+"set nu!                   "设置显示行号
 "set wrap                  "设置自动换行
 set nowrap                 "设置不自动换行
 set noswapfile             " 
@@ -325,7 +325,7 @@ augroup END
 """"""""""""""""""""""""""""
 "lookupfile setting
 """""""""""""""""""""""""""""
-let g:LookupFile_MinPatLength           = 2 "最少输入2个字符开始匹配
+let g:LookupFile_MinPatLength           = 3 "最少输入3个字符开始匹配
 let g:LookupFile_PreserveLastPattern    = 0 "不保存上次查找的字符串
 let g:LookupFile_PreservePatternHistory = 1 "保存查找历史
 let g:LookupFile_AlwaysAcceptFirst      = 1 "回车打开第一个匹配项目
