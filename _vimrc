@@ -35,6 +35,7 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 "------------------------------------------------
 " 环境设置
 """""""""""""""""""""""""""""""""""""""""""""""""
+set autoread               " 设置当文件被改动时自动载入  
 set guioptions-=m          " 隐藏菜单栏 
 set guioptions-=T          " 隐藏工具栏 
 set guioptions-=L          " 隐藏左侧滚动条 
