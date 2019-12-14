@@ -283,6 +283,8 @@ inoremap <A-l> <ESC>e
 nnoremap <A-h> b
 vmap <A-h> b
 inoremap <A-h> <ESC>b
+nnoremap <A-y> yiw
+nnoremap <A-p> viwp
 
 "------------------------------------------------
 " Ctrl key map
@@ -327,7 +329,7 @@ iabbrev vo volatile
 iabbrev con  continue
 
 "插入模式 获取插入时间 xtime
-iab xtime <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
+iab xtime <c-r>=strftime("%Y-%m-%d %H:%M:%S")
 
 "------------------------------------------------
 " cab 命令模式

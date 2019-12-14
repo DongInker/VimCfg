@@ -328,6 +328,8 @@ inoremap <A-l> <ESC>e
 nnoremap <A-h> b
 vmap <A-h> b
 inoremap <A-h> <ESC>b
+nnoremap <A-y> yiw
+nnoremap <A-p> viwp
 
 
 ****************************************************
