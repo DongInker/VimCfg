@@ -165,10 +165,10 @@ function! Do_CsTag()
         execute "cs add cscope.out"
     endif
     "更新ctags
-    silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q" "win7正常 win10使用会跳转到h文件中
+    "silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q" "win7正常 win10使用会跳转到h文件中
 
     "有些搜索不到 ???
-    "silent! execute "!ctags -R *"
+    silent! execute "!ctags -R *"
 
     " 执行返回文件 也就是执行:1b命令之前文件对位置
     execute "bp"
