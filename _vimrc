@@ -287,7 +287,7 @@ nnoremap <A-h> b
 vmap <A-h> b
 inoremap <A-h> <ESC>b
 nnoremap <A-y> yiw
-nnoremap <A-p> viwp
+nnoremap <A-p> viw"0p
 
 "------------------------------------------------
 " Ctrl key map
