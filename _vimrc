@@ -268,27 +268,30 @@ nmap <unique> ,p "*p
 nmap <unique> ,P "*P
 nmap <unique> ,v <C-q> 
 nmap <unique> ,wa :wall<cr>
-nmap <unique> ,wf :w<cr>
+nmap <unique> ,wf :w!<cr>
 nmap <unique> ,bin   :%!xxd -g 1<cr>
 nmap <unique> ,char  :%!xxd -r<cr>
 nmap <unique> ,ecfg  :ed $VIM/_vimrc<cr>
 nmap <unique> ,scfg  :so $VIM/_vimrc<cr>
 
 "------------------------------------------------
-" Alt key map
+" Alt(M[eta]) key map
 """""""""""""""""""""""""""""""""""""""""""""""""
 inoremap <A-j> <ESC>:w!<cr>
 nnoremap <A-j> <ESC>
 vnoremap <A-j> <ESC>
 nnoremap <A-l> e
-vmap <A-l> e
+vmap     <A-l> e
 inoremap <A-l> <ESC>e
 nnoremap <A-h> b
-vmap <A-h> b
+vmap     <A-h> b
 inoremap <A-h> <ESC>b
 nnoremap <A-y> yiw
 nnoremap <A-p> viw"0p
-
+cnoremap <A-h> <Left>
+cnoremap <A-l> <Right>
+cnoremap <A-j> <down>
+cnoremap <A-k> <up>
 "------------------------------------------------
 " Ctrl key map
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -341,14 +344,15 @@ iab xtime <c-r>=strftime("%Y-%m-%d %H:%M:%S")
 "------------------------------------------------
 "自动补全 ( { [ " '
 """""""""""""""""""""""""""""""""""""""""""""""""
-:inoremap ( ()<ESC>i
-:inoremap ) <c-r>=ClosePair(')')<CR>
-:inoremap { {<CR>}<ESC>O
-:inoremap } <c-r>=ClosePair('}')<CR>
-:inoremap [ []<ESC>i
-:inoremap ] <c-r>=ClosePair(']')<CR>
-:inoremap " ""<ESC>i
-:inoremap ' ''<ESC>i
+function! AutoPair(open, close)
+  let line = getline('.')
+  if col('.') > strlen(line) || line[col('.') - 1] == ' '
+    return a:open.a:close."\<ESC>i"
+  else
+    return a:open
+  endif
+endf
+
 function! ClosePair(char)
     if getline('.')[col('.') - 1] == a:char
         return "\<Right>"
@@ -356,4 +360,15 @@ function! ClosePair(char)
         return a:char
     endif
 endfunction
+
+"自动补全条件:一是光标在行末 二是光标下一个字符是空格
+:inoremap ( <c-r>=AutoPair('(', ')')<CR>
+"":inoremap ( ()<ESC>i
+:inoremap ) <c-r>=ClosePair(')')<CR>
+:inoremap { {<CR>}<ESC>O
+:inoremap } <c-r>=ClosePair('}')<CR>
+:inoremap [ []<ESC>i
+:inoremap ] <c-r>=ClosePair(']')<CR>
+:inoremap " ""<ESC>i
+:inoremap ' ''<ESC>i
 
