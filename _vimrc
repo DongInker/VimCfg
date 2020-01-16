@@ -1,3 +1,170 @@
+"------------------------------------------------
+"   < 判断操作系统是否是 Windows 还是 Linux >
+"""""""""""""""""""""""""""""""""""""""""""""""""
+if(has("win32") || has("win64") || has("win95") || has("win16"))
+    let g:iswindows = 1
+else
+    let g:iswindows = 0
+endif
+
+"------------------------------------------------
+"  < 判断是终端还是 Gvim >
+"""""""""""""""""""""""""""""""""""""""""""""""""
+if has("gui_running")
+    let g:isGUI = 1
+else
+    let g:isGUI = 0
+endif
+
+"------------------------------------------------
+" Vundle
+"""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible
+filetype off
+set rtp+=$USERPROFILE/vimfiles/bundle/Vundle.vim/
+call vundle#begin('$USERPROFILE/vimfiles/bundle/')
+
+"------------------------------------------------
+" 让 Vundle 管理 Vundle
+"""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'VundleVim/Vundle.vim'
+
+"------------------------------------------------
+"vimwiki
+"""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'vimwiki/vimwiki'
+
+"按F4转为html, <leader>whh 用浏览器打开
+let g:vimwiki_table_auto_fmt = 0
+let g:vimwiki_CJK_length = 1 
+let g:vimwiki_camel_case = 0 
+let g:vimwiki_use_mouse = 1
+"let g:vimwiki_list = [{'path': 'D:/vimwiki/',
+"            \ 'path_html': 'D:/vimwiki/html/',
+"            \ 'html_header': 'D:/vimwiki/template/header.tpl',}] 
+let wiki = {}
+"设定vimwiki的路径
+let wiki.path = 'D:/vimwiki/'
+"设定html代码的路径
+let wiki.path_html = 'D:/vimwiki/html/'
+let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c': 'c'}
+let g:vimwiki_list = [wiki]
+"let g:vimwiki_browsers=['D:\Program Files\SogouExplorer\sogouexplorer.exe']
+map <F4> :Vimwiki2HTML<cr>
+map <S-F4> :VimwikiAll2HTML<cr>
+
+"------------------------------------------------
+"自动补全 ( { [ " '
+"""""""""""""""""""""""""""""""""""""""""""""""""
+if 0
+    Plugin 'jiangmiao/auto-pairs'
+else
+    function! AutoPair(open, close)
+      let line = getline('.')
+      if col('.') > strlen(line) || line[col('.') - 1] == ' '
+        return a:open.a:close."\<ESC>i"
+      else
+        return a:open
+      endif
+    endf
+
+    function! ClosePair(char)
+        if getline('.')[col('.') - 1] == a:char
+            return "\<Right>"
+        else
+            return a:char
+        endif
+    endfunction
+
+    "自动补全条件:一是光标在行末 二是光标下一个字符是空格
+    :inoremap ( <c-r>=AutoPair('(', ')')<CR>
+    "":inoremap ( ()<ESC>i
+    :inoremap ) <c-r>=ClosePair(')')<CR>
+    :inoremap { {<CR>}<ESC>O
+    :inoremap } <c-r>=ClosePair('}')<CR>
+    :inoremap [ []<ESC>i
+    :inoremap ] <c-r>=ClosePair(']')<CR>
+    :inoremap " ""<ESC>i
+    :inoremap ' ''<ESC>i
+endif
+
+"------------------------------------------------
+"a.vim    切换"F9 却换.h 与 .c文件
+"""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'a.vim'
+
+":A :AS :AV 头/源文件切换,窗口分为左右两个窗口，并打开.h/.c文件
+nnoremap <silent> <F9> :AV<cr>
+let g:alternateSearchPath = 'sfr:./,sfr:../include,sfr:http://www.cnblogs.com/include,sfr:../source,sfr:../src,sfr:../inc'
+
+"------------------------------------------------
+"minibufexplpp.vim 多文档顶部标签栏编辑
+"""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'minibufexpl.vim'
+"操作:<C-Tab>前一项 <C-Shift-Tab>后一项 :Nb快速打开指定编号N文件
+let g:miniBufExplMapCTabSwitchBufs=1
+let g:miniBufExplMapWindowsNavVim=1
+let g:miniBufExplMapWindowNavArrows=1
+let g:miniBufExplorerMoreThanOne=1
+
+"------------------------------------------------
+"winmannger.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'winmanager'
+
+"配置FileExplorer
+let g:winManagerWindowLayout='FileExplorer|TagList'  "将winmanager设置成浏览器和TagList的组合
+"映射winmanager的快捷键
+nmap wm :WMToggle<cr>
+
+"------------------------------------------------
+"tags.exe 文件列表
+"""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'taglist.vim'
+
+set tags=tags;
+set autochdir
+"配置taglist
+let Tlist_Show_One_File=1 
+let Tlist_Exit_OnlyWindow=1
+
+"------------------------------------------------
+"lookupfile.vim genutils.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'genutils'
+Plugin 'lookupfile'
+
+let g:LookupFile_MinPatLength           = 3 "最少输入3个字符开始匹配
+let g:LookupFile_PreserveLastPattern    = 0 "不保存上次查找的字符串
+let g:LookupFile_PreservePatternHistory = 1 "保存查找历史
+let g:LookupFile_AlwaysAcceptFirst      = 1 "回车打开第一个匹配项目
+let g:LookupFile_AllowNewFiles          = 0 "不允许创建不存在的文件
+
+"查找文件名及包含出现字符串的文件
+nmap <silent> ,lf :LUTags<cr>
+"查找已打开的buffer字符名
+nmap <silent> ,ll :LUBufs<cr>
+"指定目录结构查找
+nmap <silent> ,lw :LUWalk<cr>
+",lf 根据文件内容信息打开文件
+
+"------------------------------------------------
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'grep.vim'
+Plugin 'Mark'
+"Plugin 'visualmark'
+
+"------------------------------------------------
+"ctasg.exe cscope.exe
+"""""""""""""""""""""""""""""""""""""""""""""""""
+"将ctasg.exe cscope.exe 拷贝到vimxx目录下
+"Plugin 'ctags.exe'
+"Plugin 'cscope'
+
+call vundle#end() 
+filetype plugin indent on
+""""""""End Vundle"""""""""""""""""""""""""""""""
 
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
@@ -52,6 +219,7 @@ set backspace=2            " 设置退格键可用
 "set nu!                  " 设置显示行号
 "set wrap                 " 设置自动换行
 set nowrap                 " 设置不自动换行
+set noundofile
 set noswapfile             " 
 set nobackup               " 不生成备份文件
 "set backupdir=d:\Vim\tmp " 生成备份文件到指定地方
@@ -70,13 +238,12 @@ set ignorecase smartcase   "搜索输入全小写不分大小写 输入1或1个以上区分大小写
 colorscheme desert         "设置窗口颜色 darkblue  
 set guifont=Courier_New:h10:cANSI
 
-"折叠
-set fdm=marker              " 标记折叠方法
-"set fdm=indent            " 缩进折叠方法
-set fdm=syntax              " 启动时开启折叠功能
-"set foldenable            " 开始折叠
-"set foldlevelstart=99     " 打开文件是默认不折叠代码
-"setlocal foldlevel=1      " 设置折叠层数为
+"折叠 za zM(zi)
+"set fdm=marker              " 标记折叠方法
+set fdm=indent            " 缩进折叠方法
+set foldenable            " 开始折叠
+set foldlevelstart=99     " 打开文件是默认不折叠代码
+setlocal foldlevel=1      " 设置折叠层数为
 
 
 "------------------------------------------------
@@ -86,7 +253,7 @@ function! MaximizeWindow()
     silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
 endfunction
 
-if has('win32')    
+if g:iswindows
     au GUIEnter * simalt ~x
 else    
     au GUIEnter * call MaximizeWindow()
@@ -97,8 +264,9 @@ endif
 "解决中文乱码
 """""""""""""""""""""""""""""""""""""""""""""""""
 set fileencodings=utf-8,chinese,latin-1
-if has("win32")
+if g:iswindows
     set fileencoding=chinese
+    "set fileencoding=utf-8
 else
     set fileencoding=utf-8
 endif
@@ -108,49 +276,13 @@ source $VIMRUNTIME/menu.vim
 "解决consle输出乱码
 language messages zh_CN.utf-8
 
-"------------------------------------------------
-"a.vim    头/源文件切换
-"""""""""""""""""""""""""""""""""""""""""""""""""
-":A :AS :AV 头/源文件切换,窗口分为左右两个窗口，并打开.h/.c文件
-nnoremap <silent> <F9> :AV<cr>
-let g:alternateSearchPath = 'sfr:./,sfr:../include,sfr:http://www.cnblogs.com/include,sfr:../source,sfr:../src,sfr:../inc'
-
-"------------------------------------------------
-"tags.exe
-"""""""""""""""""""""""""""""""""""""""""""""""""
-set tags=tags;
-set autochdir
-
-"配置taglist
-let Tlist_Show_One_File=1 
-let Tlist_Exit_OnlyWindow=1
-
-"------------------------------------------------
-"winmannger.vim
-"""""""""""""""""""""""""""""""""""""""""""""""""
-"配置FileExplorer
-let g:winManagerWindowLayout='FileExplorer|TagList'  "将winmanager设置成浏览器和TagList的组合
-
-"映射winmanager的快捷键
-nmap wm :WMToggle<cr>
-
-
-"------------------------------------------------
-"minibufexplpp.vim 多文档顶部标签栏编辑
-"""""""""""""""""""""""""""""""""""""""""""""""""
-"操作:<C-Tab>前一项 <C-Shift-Tab>后一项 :Nb快速打开指定编号N文件
-let g:miniBufExplMapCTabSwitchBufs=1
-let g:miniBufExplMapWindowsNavVim=1
-let g:miniBufExplMapWindowNavArrows=1
-let g:miniBufExplorerMoreThanOne=1
-
 
 "------------------------------------------------
 "cscope.exe
 """""""""""""""""""""""""""""""""""""""""""""""""
 "自动生成cscope.out并导入
 function! Do_CsTag()
-    if(has('win32'))
+    if g:iswindows
         " 跳转编号1的.vim文件 *.vim必须保证编号1文件 取巧点
         execute "1b"
         " 断开cscope.out连接    
@@ -214,21 +346,6 @@ augroup QFixToggle
     autocmd BufWinLeave * if exists("g:qfix_win") && expand("<abuf>") == g:qfix_win | unlet! g:qfix_win | endif
 augroup END
 
-"------------------------------------------------
-"lookupfile.vim genutils.vim
-"""""""""""""""""""""""""""""""""""""""""""""""""
-let g:LookupFile_MinPatLength           = 3 "最少输入3个字符开始匹配
-let g:LookupFile_PreserveLastPattern    = 0 "不保存上次查找的字符串
-let g:LookupFile_PreservePatternHistory = 1 "保存查找历史
-let g:LookupFile_AlwaysAcceptFirst      = 1 "回车打开第一个匹配项目
-let g:LookupFile_AllowNewFiles          = 0 "不允许创建不存在的文件
-
-"查找文件名及包含出现字符串的文件
-nmap <silent> ,lf :LUTags<cr>
-"查找已打开的buffer字符名
-nmap <silent> ,ll :LUBufs<cr>
-"指定目录结构查找
-nmap <silent> ,lw :LUWalk<cr>
 
 "------------------------------------------------
 "配置python解释器
@@ -237,7 +354,7 @@ autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stde
 autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m  
 autocmd BufRead *.py nmap <F3> :!python %<CR>  
 "autocmd BufRead *.py nmap <F3> :!python main.py<CR>  
-autocmd BufRead *.py nmap <F4> :make<CR>  
+"autocmd BufRead *.py nmap <F4> :make<CR>  
 "autocmd BufRead *.py copen "如果是py文件，则同时打开编译信息窗口 
 
 set filetype=python
@@ -340,35 +457,4 @@ iab xtime <c-r>=strftime("%Y-%m-%d %H:%M:%S")
 "------------------------------------------------
 " cab 命令模式
 """""""""""""""""""""""""""""""""""""""""""""""""
-
-"------------------------------------------------
-"自动补全 ( { [ " '
-"""""""""""""""""""""""""""""""""""""""""""""""""
-function! AutoPair(open, close)
-  let line = getline('.')
-  if col('.') > strlen(line) || line[col('.') - 1] == ' '
-    return a:open.a:close."\<ESC>i"
-  else
-    return a:open
-  endif
-endf
-
-function! ClosePair(char)
-    if getline('.')[col('.') - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char
-    endif
-endfunction
-
-"自动补全条件:一是光标在行末 二是光标下一个字符是空格
-:inoremap ( <c-r>=AutoPair('(', ')')<CR>
-"":inoremap ( ()<ESC>i
-:inoremap ) <c-r>=ClosePair(')')<CR>
-:inoremap { {<CR>}<ESC>O
-:inoremap } <c-r>=ClosePair('}')<CR>
-:inoremap [ []<ESC>i
-:inoremap ] <c-r>=ClosePair(']')<CR>
-:inoremap " ""<ESC>i
-:inoremap ' ''<ESC>i
 

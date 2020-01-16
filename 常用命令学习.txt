@@ -373,8 +373,8 @@ cnoremap <A-k> <up>
 | <C-i>                    |执行上次Ctrl + ]
 | yiw                      |复制当前光标下的词    
 | diw                      |删除当前光标下的词    
-| cib ci( ci{              |删除指定区域进入插入模式
-| dab di( di{              |删除指定区域
+| cib ci( ci{ ci" ci'      |删除指定区域进入插入模式
+| dab di( di{ ci" ci'      |删除指定区域
 | ddp                      |交换上下行            
 | gd                       |跳转到当前函数局部变量定义处  
 | gD                       |跳转到当前文件全局变量定义处  

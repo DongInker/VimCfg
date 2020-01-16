@@ -1,0 +1,32 @@
+安装环境Git Vim82 wim10
+Vim82安装完成后会在$USERPROFILE(C:\用户\Inker(用户名))目录下生产vimfiles文件夹
+就可以达到不管vim安装到什么目录下,都无需更改_vimrc配置文件
+
+1 添加以下代码到_vimrc最开始处
+
+set nocompatible
+filetype off
+set rtp+=$USERPROFILE/vimfiles/bundle/Vundle.vim/
+call vundle#begin('$USERPROFILE/vimfiles/bundle/')
+
+Plugin 'VundleVim/Vundle.vim'
+
+call vundle#end() 
+filetype plugin indent on
+
+2 将Vundle.vim使用git克隆到C:\Users\Inker\vimfiles\bundle目录下
+  或者将Vundle.vim复制到C:\Users\Inker\vimfiles\bundle目录下
+
+3 打开vim输入PluginInstall执行安装各插件
+
+4 以后需要什么插件可用添加安装.
+
+
+a 目前ctags.exe cscope.exe 直接使用复制到vim安装目录
+b 帮助汉化独立安装
+c 修改的c.vim matchit.vim进行复制替换
+
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
