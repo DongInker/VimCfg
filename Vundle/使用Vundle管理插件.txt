@@ -1,5 +1,6 @@
 安装环境Git Vim82 wim10
 Vim82安装完成后会在$USERPROFILE(C:\用户\Inker(用户名))目录下生产vimfiles文件夹
+如果没有生产可用在$USERPROFILE目录创建vimfiles/bundle文件夹目录.
 就可以达到不管vim安装到什么目录下,都无需更改_vimrc配置文件
 
 1 添加以下代码到_vimrc最开始处
