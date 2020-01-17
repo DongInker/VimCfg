@@ -1,22 +1,23 @@
 安装环境Git Vim82 wim10
-Vim82安装完成后会在$USERPROFILE(C:\用户\Inker(用户名))目录下生产vimfiles文件夹
-如果没有生产可用在$USERPROFILE目录创建vimfiles/bundle文件夹目录.
-就可以达到不管vim安装到什么目录下,都无需更改_vimrc配置文件
 
 1 添加以下代码到_vimrc最开始处
 
 set nocompatible
 filetype off
-set rtp+=$USERPROFILE/vimfiles/bundle/Vundle.vim/
+"指向Vundle脚本插件$VIM/vimfiles/bundle/Vundle.vim/
+set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
+
+"指向Vundle自动下载安装插件到$USERPROFILE/vimfiles/bundle/目录"
 call vundle#begin('$USERPROFILE/vimfiles/bundle/')
 
-Plugin 'VundleVim/Vundle.vim'
+"添加需要安装的插件
+Plugin 'a.vim'
 
 call vundle#end() 
 filetype plugin indent on
 
-2 将Vundle.vim使用git克隆到C:\Users\Inker\vimfiles\bundle目录下
-  或者将Vundle.vim复制到C:\Users\Inker\vimfiles\bundle目录下
+2 将Vundle.vim使用git克隆到vim安装目录 $VIM\vimfiles\bundle目录下
+  或者将Vundle.vim复制到$VIM\vimfiles\bundle目录下
 
 3 打开vim输入PluginInstall执行安装各插件
 
@@ -27,6 +28,7 @@ a 目前ctags.exe cscope.exe 直接使用复制到vim安装目录
 b 帮助汉化独立安装
 c 修改的c.vim matchit.vim进行复制替换
 
+Vundle操作命令
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache

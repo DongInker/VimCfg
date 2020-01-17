@@ -17,17 +17,16 @@ else
 endif
 
 "------------------------------------------------
-" Vundle
+" < Vundle >
 """""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 filetype off
-set rtp+=$USERPROFILE/vimfiles/bundle/Vundle.vim/
-call vundle#begin('$USERPROFILE/vimfiles/bundle/')
 
-"------------------------------------------------
-" 让 Vundle 管理 Vundle
-"""""""""""""""""""""""""""""""""""""""""""""""""
-Plugin 'VundleVim/Vundle.vim'
+"指向Vundle脚本插件$VIM/vimfiles/bundle/Vundle.vim/
+set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
+
+"指向Vundle自动下载安装插件到$USERPROFILE/vimfiles/bundle/目录"
+call vundle#begin('$USERPROFILE/vimfiles/bundle/')
 
 "------------------------------------------------
 "vimwiki
@@ -47,6 +46,8 @@ let wiki = {}
 let wiki.path = 'D:/vimwiki/'
 "设定html代码的路径
 let wiki.path_html = 'D:/vimwiki/html/'
+"保存自动添加更新目录
+let wiki.auto_toc = 1
 let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c': 'c'}
 let g:vimwiki_list = [wiki]
 "let g:vimwiki_browsers=['D:\Program Files\SogouExplorer\sogouexplorer.exe']
@@ -283,7 +284,9 @@ language messages zh_CN.utf-8
 "自动生成cscope.out并导入
 function! Do_CsTag()
     if g:iswindows
-        " 跳转编号1的.vim文件 *.vim必须保证编号1文件 取巧点
+        " 使用全局标记当前位置到Z (取巧点:使用全局标记)
+        execute "ma Z"
+        " 跳转编号1的.vim文件 *.vim必须保证编号1文件 (取巧点:1b)
         execute "1b"
         " 断开cscope.out连接    
         execute "cs kill -1"
@@ -302,8 +305,8 @@ function! Do_CsTag()
     "有些搜索不到 ???
     silent! execute "!ctags -R *"
 
-    " 执行返回文件 也就是执行:1b命令之前文件对位置
-    execute "bp"
+    " 跳转全局标记位置Z
+    execute "'Z"
 endfunction
 
 map <C-F12> <ESC>:call Do_CsTag()<cr>
