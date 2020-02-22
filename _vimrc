@@ -45,7 +45,7 @@ let wiki = {}
 "设定vimwiki的路径
 let wiki.path = 'D:/vimwiki/'
 "设定html代码的路径
-let wiki.path_html = 'D:/vimwiki/html/'
+let wiki.path_html = 'D:/vimwiki/'
 "保存自动添加更新目录
 let wiki.auto_toc = 1
 let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c': 'c'}
@@ -217,7 +217,8 @@ set softtabstop=4          " tab键的一个制表符，如果softtabstop=5,tabstop=4,则ta
 set tabstop=4              " tab键的空格数
 set expandtab              " 使用空格代替tab 在写Makefile时需要有tab
 set backspace=2            " 设置退格键可用
-"set nu!                  " 设置显示行号
+set nu!                   " 设置显示行号
+set relativenumber        " 相对行号"
 "set wrap                 " 设置自动换行
 set nowrap                 " 设置不自动换行
 set noundofile
