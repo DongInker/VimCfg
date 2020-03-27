@@ -38,9 +38,14 @@ let g:vimwiki_table_auto_fmt = 0
 let g:vimwiki_CJK_length = 1 
 let g:vimwiki_camel_case = 0 
 let g:vimwiki_use_mouse = 1
-"let g:vimwiki_list = [{'path': 'D:/vimwiki/',
-"            \ 'path_html': 'D:/vimwiki/html/',
-"            \ 'html_header': 'D:/vimwiki/template/header.tpl',}] 
+
+if 0
+Plugin 'JamshedVesuna/vim-markdown-preview'
+let g:vimwiki_list = [{'path': 'D:/vimwiki/',
+                     \ 'path_html': 'D:/vimwiki/',
+                     \ 'syntax': 'markdown', 'ext': '.md',
+                     \ 'html_header': 'D:/vimwiki/template/header.tpl',}] 
+else
 let wiki = {}
 "设定vimwiki的路径
 let wiki.path = 'D:/vimwiki/'
@@ -50,9 +55,10 @@ let wiki.path_html = 'D:/vimwiki/'
 let wiki.auto_toc = 1
 let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c': 'c'}
 let g:vimwiki_list = [wiki]
-"let g:vimwiki_browsers=['D:\Program Files\SogouExplorer\sogouexplorer.exe']
+"let g:vimwiki_browsers=['C:\Program Files\internet explorer\iexplore.exe']
 map <F4> :Vimwiki2HTML<cr>
 map <S-F4> :VimwikiAll2HTML<cr>
+endif
 
 "------------------------------------------------
 "自动补全 ( { [ " '
@@ -238,7 +244,8 @@ syntax enable              " 语法高亮
 syntax on                  " 开启文件类型侦测
 set ignorecase smartcase   "搜索输入全小写不分大小写 输入1或1个以上区分大小写 
 colorscheme desert         "设置窗口颜色 darkblue  
-set guifont=Courier_New:h10:cANSI
+"set guifont=Courier_New:h10:cANSI
+set guifont=Bitstream_Vera_Sans_Mono:h10:cANSI
 
 "折叠 za zM(zi)
 "set fdm=marker              " 标记折叠方法
