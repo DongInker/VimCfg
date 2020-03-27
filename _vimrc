@@ -246,6 +246,7 @@ set ignorecase smartcase   "搜索输入全小写不分大小写 输入1或1个以上区分大小写
 colorscheme desert         "设置窗口颜色 darkblue  
 "set guifont=Courier_New:h10:cANSI
 set guifont=Bitstream_Vera_Sans_Mono:h10:cANSI
+"set gfw=幼圆:h10.5:cGB2312:qDRAFT "设置无效
 
 "折叠 za zM(zi)
 "set fdm=marker              " 标记折叠方法
