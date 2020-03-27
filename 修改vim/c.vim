@@ -16,7 +16,7 @@ hi cFunction gui=NONE guifg=#B5A1FF
 "高亮结构体
 syn match cStruct "[a-zA-Z_0-9]\w*[\.]"me=e-1
 syn match cStruct "[a-zA-Z_0-9]\w*[->]"me=e-1
-hi cStruct gui=NONE guifg=#00ec00 font=Courier_New:h11:cANSI
+hi cStruct gui=NONE guifg=#00ec00
 
 " A bunch of useful C keywords
 syn keyword	cStatement	goto break return continue asm
