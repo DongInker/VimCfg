@@ -237,8 +237,6 @@ set nocompatible           " 关闭与Vi兼容
 set display=lastline
 set helplang=cn            " 使用中文帮助文档
 set encoding=utf-8         " 查看utf-8格式的帮助文档
-set cursorline             " 突出当前行
-set colorcolumn=85         " 在第85个字符的位置显示了一个高亮列
 set fileencodings=utf-8,gbk,utf8    "支持打开gbk格式的文件
 syntax enable              " 语法高亮 
 syntax on                  " 开启文件类型侦测
@@ -249,7 +247,22 @@ colorscheme desert         "设置窗口颜色 darkblue
 set guifont=Hack:h11:cANSI
 "set gfw=幼圆:h10.5:cGB2312:qDRAFT "设置无效
 
+
+"开启高亮光标列
+"set cursorcolumn
+"hi CursorColumn cterm=NONE ctermbg=#000000 ctermfg=white guibg=darkred guifg=white
+
+"开启光亮光标行
+set cursorline
+hi CursorLine  guibg=black
+
+"列界线
+set colorcolumn=85         " 在第85个字符的位置显示了一个高亮列
+hi colorcolumn guibg=black
+
+"------------------------------------------------
 "折叠 za zM(zi)
+"""""""""""""""""""""""""""""""""""""""""""""""""
 "set fdm=marker              " 标记折叠方法
 set fdm=indent            " 缩进折叠方法
 set foldenable            " 开始折叠
