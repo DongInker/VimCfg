@@ -40,24 +40,25 @@ let g:vimwiki_camel_case = 0
 let g:vimwiki_use_mouse = 1
 
 if 0
-Plugin 'JamshedVesuna/vim-markdown-preview'
-let g:vimwiki_list = [{'path': 'D:/vimwiki/',
-                     \ 'path_html': 'D:/vimwiki/',
-                     \ 'syntax': 'markdown', 'ext': '.md',
-                     \ 'html_header': 'D:/vimwiki/template/header.tpl',}] 
+    Plugin 'JamshedVesuna/vim-markdown-preview'
+    let g:vimwiki_list = [{'path': 'D:/vimwiki/',
+                         \ 'path_html': 'D:/vimwiki/',
+                         \ 'syntax': 'markdown', 'ext': '.md',
+                         \ 'html_header': 'D:/vimwiki/template/header.tpl',}] 
 else
-let wiki = {}
-"设定vimwiki的路径
-let wiki.path = 'D:/vimwiki/'
-"设定html代码的路径
-let wiki.path_html = 'D:/vimwiki/'
-"保存自动添加更新目录
-let wiki.auto_toc = 1
-let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c': 'c'}
-let g:vimwiki_list = [wiki]
-"let g:vimwiki_browsers=['C:\Program Files\internet explorer\iexplore.exe']
-map <F4> :Vimwiki2HTML<cr>
-map <S-F4> :VimwikiAll2HTML<cr>
+    let wiki = {}
+    "设定vimwiki的路径
+    let wiki.path = 'D:/vimwiki/'
+    "设定html代码的路径
+    let wiki.path_html = 'D:/vimwiki/'
+    "保存自动添加更新目录
+    let wiki.auto_toc = 1
+    let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'c': 'c'}
+    let g:vimwiki_list = [wiki]
+    "let g:vimwiki_browsers=['C:\Program Files\internet explorer\iexplore.exe']
+    map <F4> :Vimwiki2HTML<cr>
+    map <S-F4> :VimwikiAll2HTML<cr>
+    map <Leader>tt <Plug>VimwikiToggleListItem
 endif
 
 "------------------------------------------------
@@ -85,7 +86,6 @@ else
 
     "自动补全条件:一是光标在行末 二是光标下一个字符是空格
     :inoremap ( <c-r>=AutoPair('(', ')')<CR>
-    "":inoremap ( ()<ESC>i
     :inoremap ) <c-r>=ClosePair(')')<CR>
     :inoremap { {<CR>}<ESC>O
     :inoremap } <c-r>=ClosePair('}')<CR>
@@ -93,6 +93,12 @@ else
     :inoremap ] <c-r>=ClosePair(']')<CR>
     :inoremap " ""<ESC>i
     :inoremap ' ''<ESC>i
+
+    :vnoremap $( <esc>`>a)<esc>`<i(<esc>
+    :vnoremap $[ <esc>`>a]<esc>`<i[<esc>
+    :vnoremap ${ <esc>`>a}<esc>`<i{<esc>
+    :vnoremap $" <esc>`>a"<esc>`<i"<esc>
+    :vnoremap $' <esc>`>a'<esc>`<i'<esc>
 endif
 
 "------------------------------------------------
@@ -107,12 +113,18 @@ let g:alternateSearchPath = 'sfr:./,sfr:../include,sfr:http://www.cnblogs.com/in
 "------------------------------------------------
 "minibufexplpp.vim 多文档顶部标签栏编辑
 """""""""""""""""""""""""""""""""""""""""""""""""
-Plugin 'minibufexpl.vim'
-"操作:<C-Tab>前一项 <C-Shift-Tab>后一项 :Nb快速打开指定编号N文件
-let g:miniBufExplMapCTabSwitchBufs=1
-let g:miniBufExplMapWindowsNavVim=1
-let g:miniBufExplMapWindowNavArrows=1
-let g:miniBufExplorerMoreThanOne=1
+" 使用会出现多个标签栏 严重影响体验
+if 0
+    Plugin 'minibufexpl.vim'
+    "操作:<C-Tab>前一项 <C-Shift-Tab>后一项 :Nb快速打开指定编号N文件
+    let g:miniBufExplMapWindowNavArrows = 1
+    "let g:miniBufExplMapWindowNavVim = 1
+    "let g:miniBufExplMapCTabSwitchbufs = 1
+    let g:miniBufExplModSelTarget = 1
+    "解决FileExplorer窗口变小问题
+    let g:miniBufExplForceSyntaxEnable = 1
+    let g:miniBufExplorerMoreThanOne = 2
+endif
 
 "------------------------------------------------
 "winmannger.vim
@@ -141,7 +153,7 @@ let Tlist_Exit_OnlyWindow=1
 Plugin 'genutils'
 Plugin 'lookupfile'
 
-let g:LookupFile_MinPatLength           = 3 "最少输入3个字符开始匹配
+let g:LookupFile_MinPatLength           = 2 "最少输入2个字符开始匹配
 let g:LookupFile_PreserveLastPattern    = 0 "不保存上次查找的字符串
 let g:LookupFile_PreservePatternHistory = 1 "保存查找历史
 let g:LookupFile_AlwaysAcceptFirst      = 1 "回车打开第一个匹配项目
@@ -234,37 +246,35 @@ set nobackup               " 不生成备份文件
 set hidden                 " 允许在未保存修改时切换缓冲区
 set showcmd                " 显示命令
 set nocompatible           " 关闭与Vi兼容
-set display=lastline
+"set display=lastline
 set helplang=cn            " 使用中文帮助文档
 set encoding=utf-8         " 查看utf-8格式的帮助文档
 set fileencodings=utf-8,gbk,utf8    "支持打开gbk格式的文件
 syntax enable              " 语法高亮 
 syntax on                  " 开启文件类型侦测
 set ignorecase smartcase   "搜索输入全小写不分大小写 输入1或1个以上区分大小写 
-colorscheme desert         "设置窗口颜色 darkblue  
-"set guifont=Courier_New:h10:cANSI
-"set guifont=Bitstream_Vera_Sans_Mono:h10:cANSI
-set guifont=Hack:h11:cANSI
+colorscheme peaksea         "设置窗口颜色
+set gfn=IBM\ Plex\ Mono:h14,Source\ Code\ Pro:h12,Bitstream\ Vera\ Sans\ Mono:h11
 "set gfw=幼圆:h10.5:cGB2312:qDRAFT "设置无效
 
-
-"开启高亮光标列
+"开启高亮光标----列
 "set cursorcolumn
 "hi CursorColumn cterm=NONE ctermbg=#000000 ctermfg=white guibg=darkred guifg=white
 
-"开启光亮光标行
+"开启光亮光标----行
 set cursorline
-hi CursorLine  guibg=black
+"hi CursorLine  guibg=black
 
 "列界线
 set colorcolumn=85         " 在第85个字符的位置显示了一个高亮列
-hi colorcolumn guibg=black
+hi colorcolumn guibg=DarkRed
 
 "------------------------------------------------
 "折叠 za zM(zi)
 """""""""""""""""""""""""""""""""""""""""""""""""
-"set fdm=marker              " 标记折叠方法
-set fdm=indent            " 缩进折叠方法
+"set fdm=marker            " 标记折叠方法
+"set fdm=indent            " 缩进折叠方法
+set fdm=syntax            " 语法折叠方法
 set foldenable            " 开始折叠
 set foldlevelstart=99     " 打开文件是默认不折叠代码
 setlocal foldlevel=1      " 设置折叠层数为
@@ -464,6 +474,7 @@ nmap wh        <C-w>h
 nmap wj        <C-w>j
 nmap wk        <C-w>k
 nmap wl        <C-w>l
+nmap wo        <C-w>o
 
 "------------------------------------------------
 " ab 所以模式
