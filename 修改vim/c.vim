@@ -8,15 +8,15 @@ if exists("b:current_syntax")
   finish
 endif
 
-"高亮函数
+"高亮函数 InkerDong 2020-06-28 10:41:52
 syn match cFunction "\<[a-zA-Z_][a-zA-Z_0-9]*\>[^()]*)("me=e-2
 syn match cFunction "\<[a-zA-Z_][a-zA-Z_0-9]*\>\s*("me=e-1
 hi cFunction gui=NONE guifg=#B5A1FF
 
-"高亮结构体
+"高亮结构体 InkerDong 2020-06-28 10:41:44
 syn match cStruct "[a-zA-Z_0-9]\w*[\.]"me=e-1
 syn match cStruct "[a-zA-Z_0-9]\w*[->]"me=e-1
-hi cStruct gui=NONE guifg=#00ec00
+hi cStruct gui=NONE guifg=#00ec00 "font=Courier_New:h11:cANSI 
 
 " A bunch of useful C keywords
 syn keyword	cStatement	goto break return continue asm
