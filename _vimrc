@@ -66,6 +66,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""
 if 1
     Plugin 'jiangmiao/auto-pairs'
+    let g:AutoPairsShortcutToggle = '<M-u>'
     :vnoremap ( <esc>`<i(<esc>`>a)<esc>
 else
     function! AutoPair(open, close)
