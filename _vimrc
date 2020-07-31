@@ -64,8 +64,9 @@ endif
 "------------------------------------------------
 "自动补全 ( { [ " '
 """""""""""""""""""""""""""""""""""""""""""""""""
-if 0
+if 1
     Plugin 'jiangmiao/auto-pairs'
+    :vnoremap ( <esc>`<i(<esc>`>a)<esc>
 else
     function! AutoPair(open, close)
       let line = getline('.')
@@ -84,6 +85,7 @@ else
         endif
     endfunction
 
+    
     "自动补全条件:一是光标在行末 二是光标下一个字符是空格
     :inoremap ( <c-r>=AutoPair('(', ')')<CR>
     :inoremap ) <c-r>=ClosePair(')')<CR>
@@ -94,11 +96,11 @@ else
     :inoremap " ""<ESC>i
     :inoremap ' ''<ESC>i
 
-    :vnoremap $( <esc>`>a)<esc>`<i(<esc>
-    :vnoremap $[ <esc>`>a]<esc>`<i[<esc>
-    :vnoremap ${ <esc>`>a}<esc>`<i{<esc>
-    :vnoremap $" <esc>`>a"<esc>`<i"<esc>
-    :vnoremap $' <esc>`>a'<esc>`<i'<esc>
+    :vnoremap $( <esc>`<i(<esc>`>a)<esc>
+    :vnoremap $[ <esc>`<i[<esc>`>a]<esc>
+    :vnoremap ${ <esc>`<i{<esc>`>a}<esc>
+    :vnoremap $" <esc>`<i"<esc>`>a"<esc>
+    :vnoremap $' <esc>`<i'<esc>`>a'<esc>
 endif
 
 "------------------------------------------------
