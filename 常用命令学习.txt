@@ -285,8 +285,6 @@ GPIO_PIN4
 |---------+----------|-----------|--------------------------+
 |mode nvi:| New key  | Old key   |         Cmd              |
 |---------+----------|-----------|--------------------------+
-|         |    F2    |           | 下一个可视标记行         |
-|         |  S-F2    |           | 上一个可视标记行         |
 |         |    F6    |           | 开/关QuickFix窗口        |
 |         |    F7    |           | QuickFix 前一项          |
 |         |    F8    |           | QuickFix 后一项          |
@@ -306,9 +304,9 @@ GPIO_PIN4
 |         |   wb     |           | 调整当前窗口100列        |
 | n       | <C-h>    |           | 调整当前窗口变大         |
 | n       | <C-l>    |           | 调整当前窗口变小         |
-| n v     | tab      | %         | tab替换 %                |
 | n v     | <C-j>    | <C-f>     | 下一页代码               |
 | n v     | <C-k>    | <C-b>     | 上一页代码               |
+| n v     | tab      | %         | tab替换 %                |
 |---------+----------|-----------|--------------------------+
 
 ****************************************************
@@ -330,10 +328,6 @@ GPIO_PIN4
 |   ,lf    |:LUTags<cr>           | 查找指定文件 使用技巧.c文件使用demopr搜索 .h文件使用 _demo搜索
 |   ,ll    |:LUBufs<cr>           | 查找缓存字符             |
 |   ,lw    |:LUWalk<cr>           | 查找目录结构             |
-|   ,bin   |:%!xxd -g 1           | 二进制显示               |
-|   ,char  |:%!xxd -r             | 字符显示                 |
-|   ,ecfg  |:ed $VIM/_vimrc<cr>   | 打开编辑VIM配置文件_vimrc|
-|   ,scfg  |:so $VIM/_vimrc<cr>   | 重新加载VIM配置文件_vimrc|
 +----------|----------------------|--------------------------+
 
 ****************************************************
@@ -440,11 +434,52 @@ cnoremap <A-k> <up>
 +-------------|-------------+
 
 :cab[brev]    作用于命令模式
-+-------------|-------------+
-|    缩写     |    完整     |
-+-------------|-------------+
-| path/\      | s/\//\\/g   |
-| path\/      | s/\\/\//g   |
-+-------------|-------------+
++-------------|----------------------+
+|    缩写     |    完整              |
++-------------|----------------------+
+| path/\      | s/\//\\/g            |
+| path\/      | s/\\/\//g            |
+| lookupfile  |filenametags          |
+| ecfg        |:ed $VIM/_vimrc<cr>   | 编辑配置文件
+| scfg        |:so $VIM/_vimrc<cr>   | 载入配置文件
+| bin         |:%!xxd -g 1           | 二进制显示文件
+| char        |:%!xxd -r             | 字符显示文件
++-------------|----------------------+
+
+*Prj.vim 可当作每个项目定制vim配置文件
+
+=== 使用步骤 ===
+    * 在代码根目录新建 Prj.vim 文件
+    * 打开Prj.vim文件,并复制下面{{{}}}中的代码到Prj.vim中
+    * 实际项目路径D:/Inker/Work/Model/S32F3wc/trunk/SW_S32F3_MAIN/code替换
+    * 使用:path\/命令将目录\改为/
+    * 保存Prj.vim并关闭重新打开
+
+{{{
+"头文件处 gf打开该头文件
+"添加项目之前的头文件路径 就可使用gf打开相关头文件
+"添加ARM库文件路径 与安装软件路径有关
+set path+=C:/Keil_v5/ARM/ARMCC/include/**
+"添加项目文件路径 如何修改为相对路径更为通用???
+set path+=D:/Inker/Work/Model/S32F3wc/trunk/SW_S32F3_MAIN/code/**
+
+
+" lookupfile
+let g:this_project_base_dir = "."
+let g:project_lookup_file   = "./filenametags"
+let g:LookupFile_TagExpr    ='"./filenametags"'
+
+" filenametags 不存在自动创建
+if filereadable("filenametags") == 0
+    execute "call ProjectTagUpdateLookupFile()"
+endif
+
+"  cscope.out 存在自动连接
+if filereadable("cscope.out")
+    execute "cs add cscope.out"
+else
+    execute "call Do_CsTag()"
+endif 
+}}}
   
    

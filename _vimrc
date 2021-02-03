@@ -162,6 +162,45 @@ let g:LookupFile_PreservePatternHistory = 1 "保存查找历史
 let g:LookupFile_AlwaysAcceptFirst      = 1 "回车打开第一个匹配项目
 let g:LookupFile_AllowNewFiles          = 0 "不允许创建不存在的文件
 
+function! ProjectTagUpdateLookupFile()
+    "echo "generate lookupfile.tag"
+
+    " 使用全局标记当前位置到Z (取巧点:使用全局标记)
+    execute "ma Z"
+    " 跳转编号1的.vim文件 *.vim必须保证编号1文件 (取巧点:1b)
+    execute "1b"
+
+    if filereadable(g:project_lookup_file)
+        call delete(g:project_lookup_file)
+    endif
+    execute "cd " .  g:this_project_base_dir
+    let l:lookup_tags = ["!_TAG_FILE_SORTED    2    \/2=foldcase\/"]
+    if has("win32")
+        let l:this_project_base_dir = substitute(g:this_project_base_dir, "/", "\\", "g") . "\\"
+    else
+        let l:this_project_base_dir = g:this_project_base_dir
+    endif
+    "let l:lookup_tags_file_string = system(g:project_find_program . " " . l:this_project_base_dir . " " . g:project_find_param)
+    let l:lookup_tags_file_string = system(g:project_find_program . " " . g:project_find_param)
+    let l:lookup_tags_file_list = split(l:lookup_tags_file_string, '\n')
+    let l:lookup_tags_file_list = sort(l:lookup_tags_file_list)
+    let l:item = ""
+    let l:count = 0
+
+    for l:item in l:lookup_tags_file_list
+        let l:item = fnamemodify(l:item, ':t') . "\t" . l:item . "\t" . "1"
+        let l:lookup_tags_file_list[l:count] = l:item
+        let l:count = l:count + 1
+    endfor
+
+    call extend(l:lookup_tags, l:lookup_tags_file_list)
+    call writefile(l:lookup_tags, g:project_lookup_file)
+    "echo "generate lookupfile tag done"
+    " 跳转全局标记位置Z
+    execute "'Z"
+endfunction
+let g:project_find_program  = "dir /B /S /A-D /ON"
+let g:project_find_param    = "*.fnc *.prc *.trg *.pck *.typ *.spc *.bdy *.tps *.tpb *.txt *.sql *.c *.h *.py"
 "查找文件名及包含出现字符串的文件
 nmap <silent> ,lf :LUTags<cr>
 "查找已打开的buffer字符名
@@ -169,6 +208,8 @@ nmap <silent> ,ll :LUBufs<cr>
 "指定目录结构查找
 nmap <silent> ,lw :LUWalk<cr>
 ",lf 根据文件内容信息打开文件
+
+cab lookupfile <ESC>:call ProjectTagUpdateLookupFile()<cr>
 
 "------------------------------------------------
 "
@@ -425,10 +466,6 @@ nmap <unique> ,P "*P
 nmap <unique> ,v <C-q> 
 nmap <unique> ,wa :wall<cr>
 nmap <unique> ,wf :w!<cr>
-nmap <unique> ,bin   :%!xxd -g 1<cr>
-nmap <unique> ,char  :%!xxd -r<cr>
-nmap <unique> ,ecfg  :ed $VIM/_vimrc<cr>
-nmap <unique> ,scfg  :so $VIM/_vimrc<cr>
 
 "------------------------------------------------
 " Alt(M[eta]) key map
@@ -448,6 +485,7 @@ cnoremap <A-h> <Left>
 cnoremap <A-l> <Right>
 cnoremap <A-j> <down>
 cnoremap <A-k> <up>
+nnoremap <A-=> <ESC>0f{c0<backspace><ESC>
 "------------------------------------------------
 " Ctrl key map
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -497,8 +535,12 @@ iab xtime <c-r>=strftime("%Y-%m-%d %H:%M:%S")
 "------------------------------------------------
 " cab 命令模式
 """""""""""""""""""""""""""""""""""""""""""""""""
-cab path/\ s/\//\\/g
-cab path\/ s/\\/\//g
+cab <unique> path/\ s/\//\\/g
+cab <unique> path\/ s/\\/\//g
+cab <unique> ecfg  :ed $VIM/_vimrc<cr>
+cab <unique> scfg  :so $VIM/_vimrc<cr>
+cab <unique> bin   :%!xxd -g 1<cr>
+cab <unique> char  :%!xxd -r<cr>
 
 "------------------------------------------------
 " 项目配置文件 加载 
