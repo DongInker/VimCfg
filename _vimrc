@@ -225,6 +225,14 @@ Plugin 'Mark'
 "Plugin 'ctags.exe'
 "Plugin 'cscope'
 
+"------------------------------------------------
+"indentline
+"""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'Yggdroot/indentLine'
+"let g:indentLine_char='┆'
+let g:indentLine_enabled = 0
+cab <unique> line :IndentLinesToggle<cr>
+
 call vundle#end() 
 filetype plugin indent on
 """"""""End Vundle"""""""""""""""""""""""""""""""
@@ -332,6 +340,7 @@ function! MaximizeWindow()
 endfunction
 
 if g:iswindows
+    "启动时满屏
     au GUIEnter * simalt ~x
 else    
     au GUIEnter * call MaximizeWindow()
@@ -541,6 +550,8 @@ cab <unique> ecfg  :ed $VIM/_vimrc<cr>
 cab <unique> scfg  :so $VIM/_vimrc<cr>
 cab <unique> bin   :%!xxd -g 1<cr>
 cab <unique> char  :%!xxd -r<cr>
+cab <unique> utf8  set fileencoding=utf-8<cr>
+cab <unique> cp9   set fileencoding=cp936<cr>
 
 "------------------------------------------------
 " 项目配置文件 加载 
